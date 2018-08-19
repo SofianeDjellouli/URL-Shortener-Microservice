@@ -14,6 +14,12 @@ var port = process.env.PORT || 3000;
 
 /** this project needs a db !! **/ 
 mongoose.connect(process.env.MONGO_URI);
+var Schema=mongoose.Schema;
+var urlSchema = new Schema({
+  original_url : String,
+  short_url :  Number,
+});
+var Url = mongoose.model('Url', urlSchema);
 
 app.use(cors());
 
