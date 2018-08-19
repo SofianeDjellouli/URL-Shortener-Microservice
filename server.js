@@ -55,22 +55,27 @@ app.route('/api/shorturl/new')
                         if (err) {
                           res.json({"error":"invalid URL"})
                         } else {
-                          Url.findOne({original_url: req.body.url},(err,add)=>{
-                            
+                          Url.findOne({original_url: req.body.url},(er,data)=>{
+                            if (er) console.log(er);
+                            else if (data) {
+                              console.log(data);
+                              res.json({"original_url": req.body.url,
+                                        "short_url":data.short_url});
+                            } else {
+                              console.log(data);
+                              Url.create({original_url: req.body.url,
+                                         short_url:Math.floor(Math.random() * 1000) + 1}
+                                         ,(error,dat)=>{
+                                            if(error) console.log(error);
+                                            else res.json({"original_url": req.body.url,
+                                        "short_url":dat.short_url});
+                                          });
+                              
+                              
+                              }  
                           }
-                        }()){
-                          console.log(Url.findOne({original_url: req.body.url}));
-                          res.json({"original_url": req.body.url,
-                          "short_url":Url.findOne({original_url: req.body.url}).short_url});
-                        } else if (!Url.findOne({original_url: req.body.url},(err,add)=>{})){
-                          console.log(Url.findOne({original_url: req.body.url}));
-                          Url.create({original_url: req.body.url,
-                                     short_url:Math.floor(Math.random() * 6) + 1});
-                          res.json({"original_url": req.body.url,
-                          "short_url":Url.findOne({original_url: req.body.url}).short_url});
                           
-                        };
-                      });
+                                      }}
                     });
 
 app.get('/api/shorturl/:url',(req,res)=>
