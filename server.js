@@ -55,7 +55,10 @@ app.route('/api/shorturl/new')
                           "short_url":urls.req.body.url});
                         } else if (!urls.req.body.url){
                           short_url++;
-                          urls.push({req.body.url: short_url});
+                          let u=req.body.url;
+                          urls.push({u: short_url});
+                          res.json({"original_url": req.body.url,
+                          "short_url":urls.req.body.url});
                         };
                       });
                     });
