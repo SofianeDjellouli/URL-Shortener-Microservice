@@ -4,7 +4,7 @@ var express = require('express');
 var mongo = require('mongodb');
 var mongoose = require('mongoose');
 var bodyParser=require('body-parser');
-
+var dns = require('dns');
 var cors = require('cors');
 
 var app = express();
@@ -39,5 +39,9 @@ app.listen(port, function () {
 });
 
 
-app.route('/name')
-  .post((req,res)=> res.json({name:req.body.first + ' '+req.body.last}))
+var short_url=0;
+app.route('/api/shorturl/new')
+  .post((req,res)=> res.json({"original_url": req.body.url,
+                             "short_url":short_url}));
+
+console.log(dns.lookup('google.fr'));
