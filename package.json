@@ -15,7 +15,7 @@
     "dns": "^0.2.2"
   },
   "engines": {
-    "node": "4.4.5"
+    "node": "8"
   },
   "repository": {
     "type": "git",
