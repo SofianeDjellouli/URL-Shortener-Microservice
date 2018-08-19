@@ -40,7 +40,7 @@ app.listen(port, function () {
 
 
 var short_url=0;
-var urls=[];
+var urls={};
 app.route('/api/shorturl/new')
   .post((req,res)=> {  if (req.body.url.slice(0,7)==='http://'){
                           req.body.url=req.body.url.slice(7);
@@ -50,16 +50,18 @@ app.route('/api/shorturl/new')
                       dns.lookup(req.body.url,(err,add)=>{
                         if (err) {
                           res.json({"error":"invalid URL"})
-                        } else if (urls.req.body.url){
+                        } else if (urls[req.body.url]){
                           res.json({"original_url": req.body.url,
-                          "short_url":urls.req.body.url});
-                        } else if (!urls.req.body.url){
+                          "short_url":urls[req.body.url]});
+                        } else if (!urls[req.body.url]){
                           short_url++;
-                          let u=req.body.url;
-                          urls.push({u: short_url});
+                          urls[req.body.url]=short_url;
                           res.json({"original_url": req.body.url,
-                          "short_url":urls.req.body.url});
+                          "short_url":urls[req.body.url]});
                         };
                       });
                     });
 
+app.get('/api/shorturl/'+urls[req.body.url],(req,res)=>res.redirect(urls[])
+       
+       )
