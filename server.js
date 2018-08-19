@@ -40,24 +40,23 @@ app.listen(port, function () {
 
 
 var short_url=0;
+var urls=[];
 app.route('/api/shorturl/new')
   .post((req,res)=> {  if (req.body.url.slice(0,7)==='http://'){
                           req.body.url=req.body.url.slice(7);
                         } else if (req.body.url.slice(0,8)==='https://'){
-                           req.body.url=req.body.url.slice(8);
+                          req.body.url=req.body.url.slice(8);
                       }
-                     console.log(req.body.url);
                       dns.lookup(req.body.url,(err,add)=>{
                         if (err) {
-                          console.log(err,'erreur fatale');
                           res.json({"error":"invalid URL"})
-                        }
-                        else {
-                          console.log('réussite');
+                        } else if (urls.req.body.url){
                           res.json({"original_url": req.body.url,
-                             "short_url":short_url});
-                              
+                          "short_url":urls.req.body.url});
+                        } else if (!urls.req.body.url){
+                          short_url++;
+                          urls.push({req.body.url: short_url});
                         };
                       });
-});
+                    });
 
