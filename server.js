@@ -54,18 +54,24 @@ app.route('/api/shorturl/new')
                       dns.lookup(req.body.url,(err,add)=>{
                         if (err) {
                           res.json({"error":"invalid URL"})
-                        } else if (Url.findOne({original_url: req.body.url})){
+                        } else {
+                          Url.findOne({original_url: req.body.url},(err,add)=>{
+                            
+                          }
+                        }()){
+                          console.log(Url.findOne({original_url: req.body.url}));
                           res.json({"original_url": req.body.url,
                           "short_url":Url.findOne({original_url: req.body.url}).short_url});
-                          app.get('/api/shorturl/'+urls[req.body.url],
-                            (req,res)=>res.redirect(req.body.url));
-                        } else if (!Url.findOne({original_url: req.body.url})){
+                        } else if (!Url.findOne({original_url: req.body.url},(err,add)=>{})){
+                          console.log(Url.findOne({original_url: req.body.url}));
                           Url.create({original_url: req.body.url,
                                      short_url:Math.floor(Math.random() * 6) + 1});
                           res.json({"original_url": req.body.url,
                           "short_url":Url.findOne({original_url: req.body.url}).short_url});
-                          app.get('/api/shorturl/'+urls[req.body.url],
-                            (req,res)=>res.redirect(req.body.url));
+                          
                         };
                       });
                     });
+
+app.get('/api/shorturl/:url',(req,res)=>
+        res.redirect(Url.findOne({short_url:req.params.url}).original_url));
