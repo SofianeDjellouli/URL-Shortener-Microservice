@@ -41,7 +41,12 @@ app.listen(port, function () {
 
 var short_url=0;
 app.route('/api/shorturl/new')
-  .post((req,res)=> {
+  .post((req,res)=> {  if (req.body.url.slice(0,7)==='http://'){
+                          req.body.url=req.body.url.slice(7);
+                        } else if (req.body.url.slice(0,8)==='https://'){
+                           req.body.url=req.body.url.slice(8);
+                      }
+                     console.log(req.body.url);
                       dns.lookup(req.body.url,(err,add)=>{
                         if (err) {
                           console.log(err,'erreur fatale');
