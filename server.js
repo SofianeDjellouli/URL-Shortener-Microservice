@@ -43,13 +43,16 @@ var short_url=0;
 app.route('/api/shorturl/new')
   .post((req,res)=> {
                       dns.lookup(req.body.url,(err,add)=>{
-                        if (err) console.log(err,'erreur fatale');
+                        if (err) {
+                          console.log(err,'erreur fatale');
+                          res.json({"error":"invalid URL"})
+                        }
                         else {
-                              console.log('réussite');
-                              res.json({"original_url": req.body.url,
+                          console.log('réussite');
+                          res.json({"original_url": req.body.url,
                              "short_url":short_url});
                               
-                             };
+                        };
                       });
 });
 
