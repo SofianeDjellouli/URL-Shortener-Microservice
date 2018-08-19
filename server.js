@@ -77,5 +77,7 @@ app.route('/api/shorturl/new')
     });
   });
 
-app.get('/api/shorturl/:url',(req,res)=>
-        res.redirect(Url.findOne({short_url:req.params.url}).original_url));
+app.get('/api/shorturl/:url',(req,res)=> {
+  Url.findOne({short_url:req.params.url},(err,data)=>
+              res.redirect('https://'+data.original_url))
+});
