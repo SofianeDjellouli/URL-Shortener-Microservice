@@ -53,15 +53,15 @@ app.route('/api/shorturl/new')
                         } else if (urls[req.body.url]){
                           res.json({"original_url": req.body.url,
                           "short_url":urls[req.body.url]});
+                          app.get('/api/shorturl/'+urls[req.body.url],
+                            (req,res)=>res.redirect(req.body.url));
                         } else if (!urls[req.body.url]){
                           short_url++;
                           urls[req.body.url]=short_url;
                           res.json({"original_url": req.body.url,
                           "short_url":urls[req.body.url]});
+                          app.get('/api/shorturl/'+urls[req.body.url],
+                            (req,res)=>res.redirect(req.body.url));
                         };
                       });
                     });
-
-app.get('/api/shorturl/'+urls[req.body.url],(req,res)=>res.redirect(urls[])
-       
-       )
