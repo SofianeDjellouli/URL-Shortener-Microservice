@@ -1399,7 +1399,7 @@ packages:
       tarball: 'https://github.com/component/global/archive/v2.0.1.tar.gz'
     version: 2.0.1
 registry: 'https://registry.npmjs.org/'
-shrinkwrapMinorVersion: 8
+shrinkwrapMinorVersion: 9
 shrinkwrapVersion: 3
 specifiers:
   body-parser: ^1.18.3
