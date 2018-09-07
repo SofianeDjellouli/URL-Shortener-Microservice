@@ -11,7 +11,10 @@ https://url-shortener-microservice-.glitch.me/
 3. When I visit the shortened URL, it will redirect me to my original link.
 ### Creation Example:
 POST https://url-shortener-microservice-.glitch.me/api/shorturl/new - body (urlencoded) :  url=https://www.google.com
+returns `{"original_url":"google.com","short_url":819}`
 ### Usage:
-https://url-shortener-microservice-.glitch.me/api/shorturl/341
+https://url-shortener-microservice-.glitch.me/api/shorturl/819
 #### Will redirect to:
 https://www.google.com
+## My code with comments
+https://github.com/SofianeDjellouli/URL-Shortener-Microservice/blob/master/server.js
