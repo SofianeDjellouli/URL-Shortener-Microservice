@@ -33,11 +33,17 @@ app.listen(port, function () {
 
 app.route('/api/shorturl/new')
   .post((req,res)=> {  
-//   we change the requested url so it can be parsed
-    if (req.body.url.slice(0,7)==='http://'){
-      req.body.url=req.body.url.slice(7);
+//   we change the requested url so it handles all kind of urls and can be parsed by dns
+    if (req.body.url.slice(0,11)==='http://www.'){
+      req.body.url=req.body.url.slice(11);
+    } else if (req.body.url.slice(0,12)==='https://www.'){
+      req.body.url=req.body.url.slice(12);
     } else if (req.body.url.slice(0,8)==='https://'){
       req.body.url=req.body.url.slice(8);
+    } else if (req.body.url.slice(0,7)==='http://'){
+      req.body.url=req.body.url.slice(7);
+    } else if (req.body.url.slice(0,4)==='www.'){
+      req.body.url=req.body.url.slice(4);
     }
 //   we check if the url is valid
     dns.lookup(req.body.url,(err,add)=>{
