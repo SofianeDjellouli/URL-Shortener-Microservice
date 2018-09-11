@@ -17,4 +17,5 @@ https://url-shortener-microservice-.glitch.me/api/shorturl/819
 #### Will redirect to
 https://www.google.com
 ## My code with comments
+This project being part of the FreeCodeCamp curriculum, the front end was already built. I only had to code the following file:  
 https://github.com/SofianeDjellouli/URL-Shortener-Microservice/blob/master/server.js
